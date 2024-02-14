@@ -36,9 +36,9 @@ const Navbar = () => {
                 About
               </li>
             </Link>
-            <Link to={"/sign-up"}>
+            <Link to={"/sign-in"}>
               <li className="  text-slate-700 hover:underline cursor-pointer">
-                Sign up
+                Sign in
               </li>
             </Link>
           </ul>
