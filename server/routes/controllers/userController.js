@@ -1,10 +1,13 @@
 const { User } = require("../../models")
 const bcrypt = require("bcrypt")
+const { errorHandler } = require("../../middleware/error")
+
+
 const test = (req, res) => {
     res.send("route was working")
 }
 
-const signupController = async (req, res) => {
+const signupController = async (req, res, next) => {
     try {
         const { username, password, email } = req.body
         const salt = bcrypt.genSaltSync(10)
@@ -14,11 +17,12 @@ const signupController = async (req, res) => {
             password: passwordHassed,
             email: email
         })
-        res.json({ msg: user, success: true })
-        return
+        return res.json({ msg: user, success: true })
+
     }
     catch (err) {
-        res.status(500).json({ message: err.message, success: false })
+        // res.status(500).json({ message: err.message, success: false })
+        next(err)
     }
 }
 
